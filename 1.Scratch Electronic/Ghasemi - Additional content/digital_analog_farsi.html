@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دیجیتال و آنالوگ - آموزش تعاملی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .digital-side {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .analog-side {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .demo-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .led-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            gap: 20px;
+        }
+        
+        .led {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .digital-led {
+            background: #ff0000;
+            box-shadow: 0 0 20px rgba(255,0,0,0.5);
+        }
+        
+        .digital-led.off {
+            background: #333;
+            box-shadow: none;
+        }
+        
+        .analog-led {
+            background: #ff0000;
+        }
+        
+        .slider {
+            width: 200px;
+            margin: 20px 0;
+        }
+        
+        .button-demo {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .button-demo:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+        
+        .scratch-connection {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .raspberry-pi-section {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .interactive-example {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .value-display {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .rgb-demo {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .rgb-slider {
+            text-align: center;
+        }
+        
+        .rgb-value {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .led-demo {
+                flex-direction: column;
+            }
+            
+            .rgb-demo {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔢 دیجیتال و آنالوگ چه تفاوتی دارند؟ 🎨</h1>
+        
+        <div class="card">
+            <h2>👋 سلام برنامه‌نویسان کوچک!</h2>
+            <p>امروز می‌خواهیم با دو مفهوم مهم آشنا شویم که در Scratch و Raspberry Pi Pico استفاده می‌کنید: <strong>دیجیتال</strong> و <strong>آنالوگ</strong></p>
+        </div>
+
+        <div class="comparison">
+            <div class="digital-side">
+                <h3>🔢 دیجیتال (Digital)</h3>
+                <ul>
+                    <li>فقط دو حالت دارد: روشن (1) یا خاموش (0)</li>
+                    <li>مثل کلید برق: یا روشن است یا خاموش</li>
+                    <li>مثل سوال بله/خیر</li>
+                    <li>در Scratch: True/False</li>
+                    <li>در Raspberry Pi: HIGH/LOW</li>
+                </ul>
+            </div>
+            
+            <div class="analog-side">
+                <h3>🎨 آنالوگ (Analog)</h3>
+                <ul>
+                    <li>حالت‌های مختلف دارد: کم، متوسط، زیاد</li>
+                    <li>مثل صدای رادیو: می‌تونی بلند یا آهسته کنی</li>
+                    <li>مثل نور آفتاب در طول روز</li>
+                    <li>اعداد بین 0 تا 1023 یا 0 تا 255</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>💡 مثال LED تک‌رنگ</h3>
+            <div class="demo-section">
+                <div class="interactive-example">
+                    <h4>دیجیتال: LED فقط دو حالت دارد</h4>
+                    <div class="led-demo">
+                        <div class="led digital-led" id="digitalLED">ON</div>
+                        <button class="button-demo" onclick="toggleDigitalLED()">کلیک کن!</button>
+                    </div>
+                    <p>در حالت دیجیتال، LED یا کاملاً روشن است یا کاملاً خاموش</p>
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <div class="interactive-example">
+                    <h4>آنالوگ: LED می‌تواند کم‌نور یا پرنور باشد</h4>
+                    <div class="led-demo">
+                        <div class="led analog-led" id="analogLED">50%</div>
+                    </div>
+                    <input type="range" min="0" max="255" value="127" class="slider" id="brightnessSlider" onchange="changeBrightness()">
+                    <div class="value-display" id="brightnessValue">127</div>
+                    <p>در حالت آنالوگ، می‌توانی نور LED را تنظیم کنی</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🌈 مثال LED RGB</h3>
+            <div class="demo-section">
+                <div class="interactive-example">
+                    <h4>LED RGB آنالوگ - رنگ خودت را بساز!</h4>
+                    <div class="led-demo">
+                        <div class="led" id="rgbLED" style="background: rgb(255,0,0);">RGB</div>
+                    </div>
+                    
+                    <div class="rgb-demo">
+                        <div class="rgb-slider">
+                            <label>🔴 قرمز</label>
+                            <input type="range" min="0" max="255" value="255" id="redSlider" onchange="updateRGB()">
+                            <div class="rgb-value" id="redValue">255</div>
+                        </div>
+                        
+                        <div class="rgb-slider">
+                            <label>🟢 سبز</label>
+                            <input type="range" min="0" max="255" value="0" id="greenSlider" onchange="updateRGB()">
+                            <div class="rgb-value" id="greenValue">0</div>
+                        </div>
+                        
+                        <div class="rgb-slider">
+                            <label>🔵 آبی</label>
+                            <input type="range" min="0" max="255" value="0" id="blueSlider" onchange="updateRGB()">
+                            <div class="rgb-value" id="blueValue">0</div>
+                        </div>
+                    </div>
+                    
+                    <p>هر رنگ بین 0 تا 255 تنظیم می‌شود - این همان آنالوگ است!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🔘 مثال دکمه</h3>
+            <div class="demo-section">
+                <div class="interactive-example">
+                    <h4>دکمه دیجیتال</h4>
+                    <button class="button-demo" id="digitalButton" onmousedown="pressButton()" onmouseup="releaseButton()">
+                        فشار بده!
+                    </button>
+                    <div class="value-display" id="buttonState">منتظر...</div>
+                    <p>دکمه فقط دو حالت دارد: فشرده شده (1) یا رها شده (0)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="scratch-connection">
+            <h3>🐱 ارتباط با Scratch</h3>
+            <p><strong>در Scratch:</strong></p>
+            <ul>
+                <li>دیجیتال: بلوک‌های شرطی (اگر... آنگاه...)</li>
+                <li>آنالوگ: متغیرها و اعداد (مثل موقعیت x و y)</li>
+                <li>LED RGB: تغییر رنگ لباس sprite ها</li>
+                <li>دکمه: حسگر "کلید فشرده شده؟"</li>
+            </ul>
+        </div>
+
+        <div class="raspberry-pi-section">
+            <h3>🥧 Raspberry Pi Pico</h3>
+            <p><strong>در پایتون:</strong></p>
+            <ul>
+                <li>دیجیتال خروجی: <code>pin.value(1)</code> یا <code>pin.value(0)</code></li>
+                <li>آنالوگ خروجی: <code>pwm.duty_u16(32768)</code> (برای نیمه روشنایی)</li>
+                <li>دیجیتال ورودی: <code>button.value()</code> (0 یا 1)</li>
+                <li>آنالوگ ورودی: <code>adc.read_u16()</code> (0 تا 65535)</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>🎯 خلاصه مهم</h3>
+            <div class="comparison">
+                <div class="digital-side">
+                    <h4>دیجیتال</h4>
+                    <ul>
+                        <li>فقط 0 و 1</li>
+                        <li>روشن/خاموش</li>
+                        <li>بله/خیر</li>
+                        <li>سریع و دقیق</li>
+                    </ul>
+                </div>
+                
+                <div class="analog-side">
+                    <h4>آنالوگ</h4>
+                    <ul>
+                        <li>اعداد مختلف</li>
+                        <li>کم/متوسط/زیاد</li>
+                        <li>تدریجی</li>
+                        <li>پیوسته و نرم</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🚀 پروژه‌های پیشنهادی</h3>
+            <ul>
+                <li>چراغ راهنمایی با LED قرمز، زرد، سبز (دیجیتال)</li>
+                <li>چراغ خواب با نور تدریجی (آنالوگ)</li>
+                <li>نورنمای رنگی با LED RGB (آنالوگ)</li>
+                <li>بازی واکنش سریع با دکمه (دیجیتال)</li>
+                <li>ترکیب همه موارد بالا در یک پروژه!</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let digitalLEDState = true;
+        
+        function toggleDigitalLED() {
+            const led = document.getElementById('digitalLED');
+            digitalLEDState = !digitalLEDState;
+            
+            if (digitalLEDState) {
+                led.classList.remove('off');
+                led.textContent = 'ON';
+                led.style.background = '#ff0000';
+                led.style.boxShadow = '0 0 20px rgba(255,0,0,0.8)';
+            } else {
+                led.classList.add('off');
+                led.textContent = 'OFF';
+                led.style.background = '#333';
+                led.style.boxShadow = 'none';
+            }
+        }
+        
+        function changeBrightness() {
+            const slider = document.getElementById('brightnessSlider');
+            const led = document.getElementById('analogLED');
+            const valueDisplay = document.getElementById('brightnessValue');
+            
+            const brightness = parseInt(slider.value);
+            valueDisplay.textContent = brightness;
+            
+            const percentage = Math.round((brightness / 255) * 100);
+            led.textContent = percentage + '%';
+            
+            const intensity = brightness / 255;
+            const red = Math.round(255 * intensity);
+            led.style.background = `rgb(${red}, 0, 0)`;
+            led.style.boxShadow = `0 0 ${20 * intensity}px rgba(255,0,0,${intensity})`;
+        }
+        
+        function updateRGB() {
+            const red = document.getElementById('redSlider').value;
+            const green = document.getElementById('greenSlider').value;
+            const blue = document.getElementById('blueSlider').value;
+            
+            document.getElementById('redValue').textContent = red;
+            document.getElementById('greenValue').textContent = green;
+            document.getElementById('blueValue').textContent = blue;
+            
+            const led = document.getElementById('rgbLED');
+            led.style.background = `rgb(${red}, ${green}, ${blue})`;
+            
+            const intensity = Math.max(red, green, blue) / 255;
+            led.style.boxShadow = `0 0 ${20 * intensity}px rgba(${red}, ${green}, ${blue}, 0.8)`;
+        }
+        
+        function pressButton() {
+            document.getElementById('buttonState').textContent = 'فشرده شده! (1)';
+            document.getElementById('digitalButton').style.background = '#28a745';
+        }
+        
+        function releaseButton() {
+            document.getElementById('buttonState').textContent = 'رها شده (0)';
+            document.getElementById('digitalButton').style.background = '#007bff';
+        }
+        
+        // Initialize
+        changeBrightness();
+        updateRGB();
+    </script>
+</body>
+</html>

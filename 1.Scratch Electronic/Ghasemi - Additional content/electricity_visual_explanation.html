@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricity for Young Makers</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 0;
+        }
+        
+        .section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .water-analogy {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .pipe-container {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(to right, #4a90e2, #357abd);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid #2c5aa0;
+        }
+        
+        .water-flow {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background: #87ceeb;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            animation: flow 2s linear infinite;
+        }
+        
+        @keyframes flow {
+            0% { left: -20px; }
+            100% { left: calc(100% + 20px); }
+        }
+        
+        .pressure-gauge {
+            width: 100px;
+            height: 100px;
+            border: 5px solid #fff;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, #ff6b6b, #ee5a52);
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .interactive-demo {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .slider-container {
+            margin: 20px 0;
+        }
+        
+        .slider {
+            width: 300px;
+            height: 10px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            cursor: pointer;
+        }
+        
+        .circuit-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .battery {
+            width: 80px;
+            height: 120px;
+            background: linear-gradient(to bottom, #333, #666);
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .battery::before {
+            content: '+';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ff6b6b;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .battery::after {
+            content: '−';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #4a90e2;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .wire {
+            width: 100px;
+            height: 4px;
+            background: #ffd700;
+            position: relative;
+        }
+        
+        .electron {
+            position: absolute;
+            top: -6px;
+            width: 14px;
+            height: 14px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            animation: moveElectron 3s linear infinite;
+        }
+        
+        @keyframes moveElectron {
+            0% { left: 0; }
+            100% { left: calc(100% - 14px); }
+        }
+        
+        .led {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffff00, #ffd700);
+            animation: glow 1s ease-in-out infinite alternate;
+            position: relative;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 10px #ffff00; }
+            to { box-shadow: 0 0 30px #ffff00, 0 0 40px #ffff00; }
+        }
+        
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .comparison-card {
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .emoji {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .scratch-connection {
+            background: linear-gradient(45deg, #ff9500, #ff6b35);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .pico-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .microcontroller {
+            width: 100px;
+            height: 60px;
+            background: #2d5016;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .pin {
+            position: absolute;
+            width: 4px;
+            height: 10px;
+            background: #ffd700;
+        }
+        
+        .pin:nth-child(1) { top: -10px; left: 10px; }
+        .pin:nth-child(2) { top: -10px; left: 20px; }
+        .pin:nth-child(3) { top: -10px; left: 30px; }
+        
+        .fun-fact {
+            background: rgba(255,255,255,0.15);
+            border-left: 5px solid #ff6b6b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+        }
+        
+        .voltage-demo, .current-demo {
+            display: none;
+        }
+        
+        .voltage-demo.active, .current-demo.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Electricity for Young Makers! ⚡</h1>
+            <p style="font-size: 1.3em;">Learn about Voltage & Current for your Scratch + Raspberry Pi Pico projects!</p>
+        </div>
+
+        <div class="section">
+            <h2>🚰 Think of Electricity Like Water!</h2>
+            <div class="water-analogy">
+                <div>
+                    <h3>Water in Pipes = Electricity in Wires</h3>
+                    <div class="pipe-container">
+                        <div class="water-flow"></div>
+                        <div class="water-flow" style="animation-delay: 0.5s;"></div>
+                        <div class="water-flow" style="animation-delay: 1s;"></div>
+                    </div>
+                    <p>Just like water flows through pipes, electricity flows through wires!</p>
+                </div>
+                <div>
+                    <h3>Water Pressure = Voltage</h3>
+                    <div class="pressure-gauge" id="pressureGauge">3V</div>
+                    <p>Higher pressure pushes water faster. Higher voltage pushes electricity stronger!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚡ Let's Compare: Water vs Electricity</h2>
+            <div class="comparison-table">
+                <div class="comparison-card">
+                    <div class="emoji">🚰</div>
+                    <h3>Water System</h3>
+                    <p><strong>Pressure:</strong> How hard water pushes</p>
+                    <p><strong>Flow:</strong> How much water moves</p>
+                </div>
+                <div class="comparison-card">
+                    <div class="emoji">⚡</div>
+                    <h3>Electrical System</h3>
+                    <p><strong>Voltage (V):</strong> How hard electricity pushes</p>
+                    <p><strong>Current (A):</strong> How much electricity moves</p>
+                </div>
+                <div class="comparison-card">
+                    <div class="emoji">🎮</div>
+                    <h3>Your Projects</h3>
+                    <p><strong>Pi Pico:</strong> Works at 3.3V</p>
+                    <p><strong>LEDs:</strong> Need the right current!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="interactive-demo">
+                <h2>🎛️ Interactive Demo: Control the Flow!</h2>
+                <button onclick="showVoltage()">Show Voltage Demo</button>
+                <button onclick="showCurrent()">Show Current Demo</button>
+                
+                <div class="voltage-demo" id="voltageDemo">
+                    <h3>🔋 Voltage Control</h3>
+                    <p>Voltage is like water pressure - it pushes the electrons!</p>
+                    <div class="slider-container">
+                        <label>Battery Voltage: <span id="voltageValue">3.3V</span></label><br>
+                        <input type="range" min="1" max="9" value="3.3" step="0.1" class="slider" id="voltageSlider" oninput="updateVoltage()">
+                    </div>
+                    <div class="circuit-demo">
+                        <div class="battery"></div>
+                        <div class="wire">
+                            <div class="electron" id="electron1"></div>
+                        </div>
+                        <div class="led" id="demoLed"></div>
+                    </div>
+                    <p id="voltageExplain">Perfect! 3.3V is just right for Pi Pico!</p>
+                </div>
+
+                <div class="current-demo" id="currentDemo">
+                    <h3>🌊 Current Flow</h3>
+                    <p>Current is how many electrons flow past a point - like counting cars on a highway!</p>
+                    <div class="slider-container">
+                        <label>Current: <span id="currentValue">20mA</span></label><br>
+                        <input type="range" min="1" max="100" value="20" class="slider" id="currentSlider" oninput="updateCurrent()">
+                    </div>
+                    <div class="circuit-demo">
+                        <div class="battery"></div>
+                        <div class="wire">
+                            <div class="electron" id="electron2"></div>
+                            <div class="electron" id="electron3" style="animation-delay: 0.5s;"></div>
+                        </div>
+                        <div class="led" id="currentLed"></div>
+                    </div>
+                    <p id="currentExplain">Great! 20mA is perfect for most LEDs!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="scratch-connection">
+            <h2>🎯 How This Helps Your Scratch + Pi Pico Projects!</h2>
+            <div class="pico-demo">
+                <div class="microcontroller">
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                </div>
+                <p style="font-size: 1.2em;">→</p>
+                <div class="led"></div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+                <div>
+                    <h3>🔋 Voltage in Your Projects:</h3>
+                    <ul style="text-align: left;">
+                        <li>Pi Pico outputs 3.3V (perfect for most sensors!)</li>
+                        <li>Some LEDs need exactly 3.3V</li>
+                        <li>Too much voltage = broken components! 💥</li>
+                        <li>Too little voltage = nothing works 😴</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>⚡ Current in Your Projects:</h3>
+                    <ul style="text-align: left;">
+                        <li>LEDs typically need 10-20mA</li>
+                        <li>Motors need much more current</li>
+                        <li>Pi Pico pins can give up to 16mA safely</li>
+                        <li>Need more? Use a transistor or relay!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧠 Key Things to Remember:</h2>
+            <div class="fun-fact">
+                <strong>💡 Voltage</strong> is the "push" - like how hard you squeeze a water balloon
+            </div>
+            <div class="fun-fact">
+                <strong>🌊 Current</strong> is the "flow" - like how much water comes out per second
+            </div>
+            <div class="fun-fact">
+                <strong>🎯 In Scratch:</strong> You control voltage with digital pins (HIGH/LOW = 3.3V/0V)
+            </div>
+            <div class="fun-fact">
+                <strong>⚠️ Safety:</strong> Always check component ratings before connecting!
+            </div>
+        </div>
+
+        <div class="section" style="text-align: center;">
+            <h2>🚀 Ready to Build Amazing Projects!</h2>
+            <p style="font-size: 1.2em;">Now you understand electricity basics! You can:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div class="comparison-card">
+                    <div class="emoji">💡</div>
+                    <p>Make LEDs blink with the right voltage!</p>
+                </div>
+                <div class="comparison-card">
+                    <div class="emoji">🔧</div>
+                    <p>Choose components that match Pi Pico's specs!</p>
+                </div>
+                <div class="comparison-card">
+                    <div class="emoji">🎮</div>
+                    <p>Build awesome Scratch projects safely!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showVoltage() {
+            document.getElementById('voltageDemo').classList.add('active');
+            document.getElementById('currentDemo').classList.remove('active');
+        }
+
+        function showCurrent() {
+            document.getElementById('currentDemo').classList.add('active');
+            document.getElementById('voltageDemo').classList.remove('active');
+        }
+
+        function updateVoltage() {
+            const slider = document.getElementById('voltageSlider');
+            const value = document.getElementById('voltageValue');
+            const explain = document.getElementById('voltageExplain');
+            const led = document.getElementById('demoLed');
+            const electron = document.getElementById('electron1');
+            
+            value.textContent = slider.value + 'V';
+            
+            // Update electron speed based on voltage
+            const speed = parseFloat(slider.value) / 3.3; // Normalize to 3.3V
+            electron.style.animationDuration = (3 / speed) + 's';
+            
+            if (slider.value < 2) {
+                explain.textContent = "Too low! Components won't work properly.";
+                led.style.opacity = '0.3';
+            } else if (slider.value > 5) {
+                explain.textContent = "Too high! You might damage your Pi Pico!";
+                led.style.background = 'radial-gradient(circle, #ff0000, #cc0000)';
+            } else if (slider.value >= 3 && slider.value <= 3.6) {
+                explain.textContent = "Perfect! This is the Pi Pico's safe voltage range!";
+                led.style.background = 'radial-gradient(circle, #ffff00, #ffd700)';
+                led.style.opacity = '1';
+            } else {
+                explain.textContent = "This voltage works, but 3.3V is ideal for Pi Pico!";
+                led.style.background = 'radial-gradient(circle, #ffff00, #ffd700)';
+                led.style.opacity = '0.8';
+            }
+        }
+
+        function updateCurrent() {
+            const slider = document.getElementById('currentSlider');
+            const value = document.getElementById('currentValue');
+            const explain = document.getElementById('currentExplain');
+            const led = document.getElementById('currentLed');
+            
+            value.textContent = slider.value + 'mA';
+            
+            if (slider.value < 10) {
+                explain.textContent = "Low current - LED will be dim but safe!";
+                led.style.opacity = '0.4';
+            } else if (slider.value > 50) {
+                explain.textContent = "High current - might need a resistor or transistor!";
+                led.style.boxShadow = '0 0 50px #ff0000';
+            } else if (slider.value >= 15 && slider.value <= 25) {
+                explain.textContent = "Perfect current for most LEDs!";
+                led.style.opacity = '1';
+                led.style.boxShadow = '0 0 30px #ffff00';
+            } else {
+                explain.textContent = "Good current level for LEDs!";
+                led.style.opacity = '0.8';
+            }
+        }
+
+        // Show voltage demo by default
+        showVoltage();
+    </script>
+</body>
+</html>
